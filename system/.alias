@@ -1,15 +1,11 @@
 # Shortcuts
 
 alias reload="source ~/.bash_profile"
-alias _="sudo"
-alias g="git"
-alias rr="rm -rf"
 
 # Default options
 
 alias rsync="rsync -vh"
 alias json="json -c"
-alias psgrep="psgrep -i"
 
 # Global aliases
 
@@ -72,4 +68,3 @@ alias hosts="sudo $EDITOR /etc/hosts"
 alias quit="exit"
 alias week="date +%V"
 alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"
-alias grip="grip -b"
