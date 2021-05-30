@@ -1,6 +1,6 @@
 # Shortcuts
 
-alias reload="source ~/.bash_profile"
+alias reload="source ~/.zshrc"
 
 # Default options
 
