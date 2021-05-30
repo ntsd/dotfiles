@@ -22,7 +22,6 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 - [homebrew-cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
 - [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
 - Latest Git, Bash 4, Python 3, GNU coreutils, curl, Ruby
-- [Hammerspoon](https://www.hammerspoon.org) (config: [keybindings & window management](./config/hammerspoon))
 - [Mackup](https://github.com/lra/mackup) (sync application settings)
 
 ## Installation
@@ -39,7 +38,7 @@ The Xcode Command Line Tools includes `git` and `make` (not available on stock m
 1. Install this repo with `curl` available:
 
 ```bash
-bash -c "`curl -fsSL https://raw.githubusercontent.com/webpro/dotfiles/master/remote-install.sh`"
+bash -c "`curl -fsSL https://raw.githubusercontent.com/ntsd/dotfiles/master/remote-install.sh`"
 ```
 
 This will clone or download, this repo to `~/.dotfiles` depending on the availability of `git`, `curl` or `wget`.
@@ -47,7 +46,7 @@ This will clone or download, this repo to `~/.dotfiles` depending on the availab
 1. Alternatively, clone manually into the desired location:
 
 ```bash
-git clone https://github.com/webpro/dotfiles.git ~/.dotfiles
+git clone https://github.com/ntsd/dotfiles.git ~/.dotfiles
 ```
 
 Use the [Makefile](./Makefile) to install everything [listed above](#package-overview), and symlink [runcom](./runcom)
