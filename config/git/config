@@ -1,9 +1,9 @@
 [user]
-	name = Lars Kappert
-	email = lars@webpro.nl
+	name = Jirawat Boonkumnerd
+	email = jo06942@gmail.com
 
 [github]
-	user = webpro
+	user = ntsd
 
 [core]
 	excludesfile = ~/.config/git/ignore

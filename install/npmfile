@@ -1,12 +1,6 @@
-fkill-cli
-gtop
-nodemon
 npm
 npm-check
 prettier
 release-it
-superstatic
-svgo
-tldr
-underscore-cli
+http-server
 yarn
