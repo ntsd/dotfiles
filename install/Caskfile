@@ -3,6 +3,7 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
+cask "docker"
 cask "dropbox"
 cask "firefox"
 cask "font-fira-code"
