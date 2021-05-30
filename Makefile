@@ -14,7 +14,7 @@ macos: sudo core-macos packages link
 
 linux: core-linux link
 
-core-macos: brew bash git npm ruby
+core-macos: brew zsh git npm ruby
 
 core-linux:
 	apt-get update
@@ -51,20 +51,22 @@ unlink: stow-$(OS)
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
-bash: BASH=/usr/local/bin/bash
-bash: SHELLS=/private/etc/shells
-bash: brew
+zsh: ZSH=/usr/local/bin/bash
+zsh: SHELLS=/private/etc/shells
+zsh: brew
 ifdef GITHUB_ACTION
-	if ! grep -q $(BASH) $(SHELLS); then \
-		brew install bash bash-completion@2 pcre && \
-		sudo append $(BASH) $(SHELLS) && \
-		sudo chsh -s $(BASH); \
+	if ! grep -q $(ZSH) $(SHELLS); then \
+		brew install zsh && \
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+		sudo append $(ZSH) $(SHELLS) && \
+		sudo chsh -s $(ZSH); \
 	fi
 else
-	if ! grep -q $(BASH) $(SHELLS); then \
-		brew install bash bash-completion@2 pcre && \
-		sudo append $(BASH) $(SHELLS) && \
-		chsh -s $(BASH); \
+	if ! grep -q $(ZSH) $(SHELLS); then \
+		brew install zsh && \
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+		sudo append $(ZSH) $(SHELLS) && \
+		chsh -s $(ZSH); \
 	fi
 endif
 
@@ -92,7 +94,3 @@ node-packages: npm
 
 test:
 	. $(NVM_DIR)/nvm.sh; bats test
-
-zsh:
-	brew list zsh || brew install zsh
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
