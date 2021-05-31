@@ -1,0 +1,170 @@
+{
+  "entries": {
+    "tap": {
+      "homebrew/cask": {
+        "revision": "be995d8c388ab2a993d4be714b579b7f00ef8f51"
+      },
+      "homebrew/cask-drivers": {
+        "revision": "c5c72c745be3e63912bfd91d5aac05bfef10f332"
+      },
+      "homebrew/cask-fonts": {
+        "revision": "8e58e47f2ab8769da3257bcb1e65e0e4a71787c3"
+      },
+      "homebrew/cask-versions": {
+        "revision": "4e31d687ad00ed790a25530d6f9d37e1324fa073"
+      }
+    },
+    "cask": {
+      "docker": {
+        "version": "3.3.3,64133",
+        "options": {
+          "full_name": "docker"
+        }
+      },
+      "dropbox": {
+        "version": "123.4.4832",
+        "options": {
+          "full_name": "dropbox"
+        }
+      },
+      "firefox": {
+        "version": "88.0.1",
+        "options": {
+          "full_name": "firefox"
+        }
+      },
+      "font-fira-code": {
+        "version": "5.2",
+        "options": {
+          "full_name": "font-fira-code"
+        }
+      },
+      "font-hack": {
+        "version": "3.003",
+        "options": {
+          "full_name": "font-hack"
+        }
+      },
+      "google-chrome": {
+        "version": "91.0.4472.77",
+        "options": {
+          "full_name": "google-chrome"
+        }
+      },
+      "google-chrome-canary": {
+        "version": "93.0.4527.0",
+        "options": {
+          "full_name": "google-chrome-canary"
+        }
+      },
+      "maccy": {
+        "version": "0.20.1,6",
+        "options": {
+          "full_name": "maccy"
+        }
+      },
+      "postman": {
+        "version": "8.5.1",
+        "options": {
+          "full_name": "postman"
+        }
+      },
+      "slack": {
+        "version": "4.16.2",
+        "options": {
+          "full_name": "slack"
+        }
+      },
+      "sourcetree": {
+        "version": "4.1.1,237",
+        "options": {
+          "full_name": "sourcetree"
+        }
+      },
+      "spotify": {
+        "version": "1.1.60.672.g6ad9c215,1.1.60.672.g6ad9c215-15",
+        "options": {
+          "full_name": "spotify"
+        }
+      },
+      "visual-studio-code": {
+        "version": "1.56.2",
+        "options": {
+          "full_name": "visual-studio-code"
+        }
+      },
+      "vlc": {
+        "version": "3.0.14",
+        "options": {
+          "full_name": "vlc"
+        }
+      },
+      "joplin": {
+        "version": "1.8.5",
+        "options": {
+          "full_name": "joplin"
+        }
+      },
+      "qlcolorcode": {
+        "version": "4.1.0",
+        "options": {
+          "full_name": "qlcolorcode"
+        }
+      },
+      "qlstephen": {
+        "version": "1.5.1",
+        "options": {
+          "full_name": "qlstephen"
+        }
+      },
+      "qlmarkdown": {
+        "version": "1.3.6",
+        "options": {
+          "full_name": "qlmarkdown"
+        }
+      },
+      "quicklook-json": {
+        "version": "latest",
+        "options": {
+          "full_name": "quicklook-json"
+        }
+      },
+      "qlimagesize": {
+        "version": "2.6.1",
+        "options": {
+          "full_name": "qlimagesize"
+        }
+      },
+      "suspicious-package": {
+        "version": "3.7,773",
+        "options": {
+          "full_name": "suspicious-package"
+        }
+      },
+      "quicklookase": {
+        "version": "1.0",
+        "options": {
+          "full_name": "quicklookase"
+        }
+      },
+      "qlvideo": {
+        "version": "1.94",
+        "options": {
+          "full_name": "qlvideo"
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "catalina": {
+        "HOMEBREW_VERSION": "3.1.9",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "f793a62b8e8e07d5a9ba21fa38a600068bc84699",
+        "CLT": "12.2.0.0.1.1604628099",
+        "Xcode": "12.4",
+        "macOS": "10.15.7"
+      }
+    }
+  }
+}
