@@ -2,6 +2,9 @@
 
 alias reload="source ~/.zshrc"
 
+# ls colors
+alias ls='ls --color=auto'
+
 # List declared aliases, functions, paths
 
 alias aliases="alias | sed 's/=.*//'"
