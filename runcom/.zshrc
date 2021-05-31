@@ -23,7 +23,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,grep,nvm,oh_my_zsh,fix,custom}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{oh_my_zsh,function,function_*,path,env,alias,grep,nvm,fix,custom}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
@@ -32,6 +32,10 @@ if is-macos; then
     [ -f "$DOTFILE" ] && . "$DOTFILE"
   done
 fi
+
+# Set LSCOLORS
+
+eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
 
 # Hook for extra/custom stuff
 
