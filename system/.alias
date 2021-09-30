@@ -24,5 +24,4 @@ done
 unset METHOD
 
 # Miscellaneous
-alias week="date +%V"
 alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"

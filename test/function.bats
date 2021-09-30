@@ -12,12 +12,6 @@ FIXTURE_TEXT="foo"
 	[ "$ACTUAL" = "$EXPECTED" ]
 }
 
-@test "calc" {
-	ACTUAL="$(calc 1+2)"
-	EXPECTED=3
-	[ "$ACTUAL" -eq "$EXPECTED" ]
-}
-
 @test "line" {
 	ACTUAL=$(get "FIXTURE" | line 2)
 	EXPECTED="bar"
@@ -27,17 +21,5 @@ FIXTURE_TEXT="foo"
 @test "line + surrounding lines" {
 	ACTUAL=$(get "FIXTURE" | line 3 1)
 	EXPECTED=$(echo -e "bar\nbaz\nfoo")
-	[ "$ACTUAL" = "$EXPECTED" ]
-}
-
-@test "duplines" {
-	ACTUAL=$(get "FIXTURE" | duplines)
-	EXPECTED=$(echo -e "foo")
-	[ "$ACTUAL" = "$EXPECTED" ]
-}
-
-@test "uniqlines" {
-	ACTUAL=$(get "FIXTURE" | uniqlines)
-	EXPECTED=$'bar\nbaz'
 	[ "$ACTUAL" = "$EXPECTED" ]
 }
