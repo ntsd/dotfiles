@@ -75,12 +75,6 @@
           "full_name": "slack"
         }
       },
-      "sourcetree": {
-        "version": "4.1.1,237",
-        "options": {
-          "full_name": "sourcetree"
-        }
-      },
       "spotify": {
         "version": "1.1.60.672.g6ad9c215,1.1.60.672.g6ad9c215-15",
         "options": {
