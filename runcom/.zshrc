@@ -42,7 +42,7 @@ eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
 DOTFILES_EXTRA_DIR="$HOME/.extra"
 
 if [ -d "$DOTFILES_EXTRA_DIR" ]; then
-  for EXTRAFILE in "$DOTFILES_EXTRA_DIR"/runcom/*.sh; do
+  for EXTRAFILE in "$DOTFILES_EXTRA_DIR"/*.sh; do
     [ -f "$EXTRAFILE" ] && . "$EXTRAFILE"
   done
 fi

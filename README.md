@@ -91,7 +91,7 @@ You can put your custom settings, such as Git credentials in the `system/.custom
 `.bash_profile` automatically. This file is in `.gitignore`.
 
 Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`. The runcom `.bash_profile` sources all
-`~/.extra/runcom/*.sh` files.
+`~/.extra/*.sh` files.
 
 ## Additional Resources
 
