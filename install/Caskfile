@@ -17,6 +17,7 @@ cask "spotify"
 cask "visual-studio-code"
 cask "vlc"
 cask "joplin"
+cask "flux"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
