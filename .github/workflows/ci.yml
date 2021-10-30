@@ -2,8 +2,9 @@ name: Dotfiles Installation
 
 on:
   push:
-  schedule:
-    - cron: '0 17 * * 4' # Every Thursday 5:00PM
+    branches:
+      - master
+  pull_request_target:
 
 jobs:
   install:
@@ -13,12 +14,13 @@ jobs:
         os: [macos-latest, ubuntu-latest]
 
     steps:
+      - name: Try to fail
+        run: exit 1
       - name: Clean up installed software
         if: matrix.os == 'macos-latest'
         run: |
           brew uninstall --force $(brew list)
-          # brew cask uninstall --force $(brew list --cask)
-          brew cask uninstall --force google-chrome
+          brew uninstall --cask --force $(brew list --cask)
           brew cleanup --prune-prefix
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
           rm -rf "$NVM_DIR"
@@ -45,3 +47,9 @@ jobs:
       - name: Run tests
         if: matrix.os == 'macos-latest'
         run: make test
+      
+      - uses: ntsd/auto-request-changes-action@v2
+        if: ${{ github.event.pull_request && failure() }}
+
+      - uses: hmarr/auto-approve-action@v2
+        if: ${{ github.event.pull_request && success() }}
