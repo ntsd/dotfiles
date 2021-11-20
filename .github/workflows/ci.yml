@@ -2,7 +2,6 @@ name: Dotfiles Installation
 
 on:
   push:
-  pull_request:
 
 jobs:
   install:
