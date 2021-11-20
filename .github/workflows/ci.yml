@@ -11,10 +11,6 @@ jobs:
         os: [macos-latest, ubuntu-latest]
 
     steps:
-      - uses: ntsd/auto-request-changes-action@v2
-        if: ${{ failure() }}
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Try to fail
         run: exit 1
       - name: Clean up installed software
@@ -48,3 +44,9 @@ jobs:
       - name: Run tests
         if: matrix.os == 'macos-latest'
         run: make test
+      
+      - uses: ntsd/auto-request-changes-action@v2
+        if: ${{ failure() }}
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
