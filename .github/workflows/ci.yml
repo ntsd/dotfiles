@@ -2,6 +2,9 @@ name: Dotfiles Installation
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   install:
@@ -46,7 +49,7 @@ jobs:
         run: make test
       
       - uses: ntsd/auto-request-changes-action@v2
-        if: ${{ failure() }}
+        if: ${{ github.event.pull_request && failure() }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
