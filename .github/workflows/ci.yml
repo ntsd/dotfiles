@@ -51,9 +51,9 @@ jobs:
       - uses: ntsd/auto-request-changes-action@v2
         if: ${{ github.event.pull_request && failure() }}
         with:
-          github-token: "${{ secrets.GH_BOT_TOKEN }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - uses: hmarr/auto-approve-action@v2
-        if: ${{ github.event.pull_request && failure() }}
+        if: ${{ github.event.pull_request && success() }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
