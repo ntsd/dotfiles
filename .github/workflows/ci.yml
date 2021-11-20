@@ -2,8 +2,7 @@ name: Dotfiles Installation
 
 on:
   push:
-  schedule:
-    - cron: '0 17 * * 4' # Every Thursday 5:00PM
+  pull_request:
 
 jobs:
   install:
@@ -13,6 +12,10 @@ jobs:
         os: [macos-latest, ubuntu-latest]
 
     steps:
+      - uses: ntsd/auto-request-changes-action@v2
+        if: failure()
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Clean up installed software
         if: matrix.os == 'macos-latest'
         run: |
