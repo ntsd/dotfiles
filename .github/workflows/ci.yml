@@ -49,11 +49,11 @@ jobs:
         run: make test
       
       - uses: ntsd/auto-request-changes-action@v2
-        if: ${{ github.event.pull_request_target && failure() }}
+        if: ${{ github.event.pull_request && failure() }}
         with:
           github-token: "${{ secrets.GH_BOT_TOKEN }}"
 
       - uses: hmarr/auto-approve-action@v2
-        if: ${{ github.event.pull_request_target && failure() }}
+        if: ${{ github.event.pull_request && failure() }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
