@@ -18,7 +18,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           brew uninstall --force $(brew list)
-          brew uninstall --cask --force $(brew list --cask)
+          brew uninstall --cask --force google-chrome
           brew cleanup --prune-prefix
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
           rm -rf "$NVM_DIR"
@@ -51,3 +51,5 @@ jobs:
 
       - uses: hmarr/auto-approve-action@v2
         if: ${{ github.event.pull_request && success() }}
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
