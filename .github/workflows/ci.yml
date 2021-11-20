@@ -54,6 +54,6 @@ jobs:
           github-token: "${{ secrets.GH_BOT_TOKEN }}"
 
       - uses: hmarr/auto-approve-action@v2
-        if: ${{ github.event.pull_request_target && success() }}
+        if: ${{ github.event.pull_request_target && failure() }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
