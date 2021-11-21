@@ -49,7 +49,7 @@ jobs:
       - uses: ntsd/auto-request-changes-action@v2
         if: ${{ github.event.pull_request && failure() }}
         with:
-          comment-body: "The job ran failed please fit it. <br /> ![You shall not pass](https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg)"
+          comment-body: "The job ran failed please fix it. <br /> ![You shall not pass](https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg)"
 
       - uses: hmarr/auto-approve-action@v2
         if: ${{ github.event.pull_request && success() }}
