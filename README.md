@@ -24,7 +24,6 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 - [homebrew-cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
 - [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
 - Latest Git, Bash 4, Python 3, GNU coreutils, curl, Ruby
-- [Mackup](https://github.com/lra/mackup) (sync application settings)
 
 ## Installation
 
@@ -66,10 +65,6 @@ The installation process in the Makefile is tested on every push and every week 
 
 - `dotfiles dock` (set [Dock items](./macos/dock.sh))
 - `dotfiles macos` (set [macOS defaults](./macos/defaults.sh))
-- Mackup
-  - Log in to Dropbox (and wait until synced)
-  - `ln -s ~/.config/mackup/.mackup.cfg ~` (until [#632](https://github.com/lra/mackup/pull/632) is fixed)
-  - `mackup restore`
 
 ## The `dotfiles` command
 
