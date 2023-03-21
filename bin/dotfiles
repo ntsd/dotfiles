@@ -8,17 +8,12 @@ sub_help () {
   echo "Usage: $BIN_NAME <command>"
   echo
   echo "Commands:"
+  echo "   help             This help message"
   echo "   clean            Clean up caches (brew, nvm, gem)"
   echo "   dock             Apply macOS Dock settings"
-  echo "   edit             Open dotfiles in IDE ($DOTFILES_IDE)"
-  echo "   help             This help message"
   echo "   macos            Apply macOS system defaults"
   echo "   test             Run tests"
   echo "   update           Update packages and pkg managers (OS, brew, npm, gem)"
-}
-
-sub_edit () {
-  sh -c "$DOTFILES_IDE $DOTFILES_DIR"
 }
 
 sub_test () {
