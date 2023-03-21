@@ -1,7 +1,6 @@
 npm
-npm-check
+yarn
 prettier
 release-it
 http-server
-yarn
 underscore
