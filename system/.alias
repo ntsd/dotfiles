@@ -9,19 +9,8 @@ alias ls='ls --color=auto'
 
 alias aliases="alias | sed 's/=.*//'"
 alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
-alias paths='echo -e ${PATH//:/\\n}'
 
 # Network
 
 alias ip="curl -s ipinfo.io | jq -r '.ip'"
 alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
-
-# Request using GET, POST, etc. method
-
-for METHOD in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$METHOD"="lwp-request -m '$METHOD'"
-done
-unset METHOD
-
-# Miscellaneous
-alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"
