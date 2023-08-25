@@ -15,7 +15,7 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 - Updated macOS defaults
 - Well-organized and easy to customize
 - The installation and runcom setup is
-  [tested weekly on real Ubuntu and macOS machines](https://github.com/webpro/dotfiles/actions) using
+  [tested weekly on real Ubuntu and macOS machines](https://github.com/ntsd/dotfiles/actions) using
   [a GitHub Action](./.github/workflows/ci.yml)
 
 ## Packages Overview
@@ -59,7 +59,7 @@ make
 ```
 
 The installation process in the Makefile is tested on every push and every week in this
-[GitHub Action](https://github.com/webpro/dotfiles/actions).
+[GitHub Action](https://github.com/ntsd/dotfiles/actions).
 
 ## Post-Installation
 

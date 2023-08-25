@@ -32,13 +32,3 @@ jobs:
       - name: Run tests
         if: matrix.os == 'macos-latest'
         run: make test
-      
-      - uses: ntsd/auto-request-changes-action@v2
-        if: ${{ github.event.pull_request && failure() }}
-        with:
-          comment-body: "The job ran failed please fix it."
-
-      - uses: hmarr/auto-approve-action@v2
-        if: ${{ github.event.pull_request && success() }}
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
