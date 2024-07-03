@@ -1,5 +1,7 @@
 # .files
 
+> Warning The Linux is not working in the moment, beacuse the $HOME will change to /root
+
 This dotfile is created from `https://github.com/webpro/dotfiles` boilerplate
 
 These are my dotfiles. Take anything you want, but at your own risk.

@@ -2,6 +2,7 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
+ASDF_PATH := $(HOME)/.asdf
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
 
@@ -9,9 +10,9 @@ export STOW_DIR := $(DOTFILES_DIR)
 
 all: $(OS)
 
-macos: sudo core-macos packages link
+macos: sudo core-macos packages link asdf-packages
 
-linux: core-linux link
+linux: core-linux link asdf-packages
 
 core-macos: brew zsh git
 
@@ -35,6 +36,7 @@ endif
 packages: brew-packages cask-apps
 
 link: stow-$(OS)
+	# backup old dotfiles
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then \
 		mv -v $(HOME)/$$FILE{,.bak}; fi; done
 	mkdir -p $(XDG_CONFIG_HOME)
@@ -44,11 +46,15 @@ link: stow-$(OS)
 unlink: stow-$(OS)
 	stow --delete -t $(HOME) runcom
 	stow --delete -t $(XDG_CONFIG_HOME) config
+	# restore old dotfiles
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+
+asdf:
+	is-executable asdf || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
 
 zsh: ZSH=/usr/local/bin/zsh
 zsh: SHELLS=/private/etc/shells
@@ -80,6 +86,11 @@ cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 	for EXT in $$(cat install/VSCodefile); do code --install-extension $$EXT; done
 	xattr -d -r com.apple.quarantine ~/Library/QuickLook
+
+asdf-packages: asdf
+	. $(ASDF_PATH)/asdf.sh && cd $(DOTFILES_DIR)/install && \
+		cut -d' ' -f1 .tool-versions|xargs -I{} asdf plugin add {} && \
+		asdf install
 
 test:
 	bats test

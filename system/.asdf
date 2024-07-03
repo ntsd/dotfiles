@@ -1,0 +1,5 @@
+
+# Load asdf
+. "$HOME/.asdf/asdf.sh"
+# Load asdf completions
+. "$HOME/.asdf/completions/asdf.bash"
