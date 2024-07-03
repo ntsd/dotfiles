@@ -1,2 +1,2 @@
 system/.custom
-.lock.json
+*.lock.json

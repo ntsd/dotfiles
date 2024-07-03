@@ -9,7 +9,7 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 ## Highlights
 
 - Minimal efforts to install everything, using a [Makefile](./Makefile)
-- Mostly based around Homebrew, Caskroom and Node.js, latest Bash + GNU Utils
+- Mostly based around Homebrew, Caskroom, latest Bash + GNU Utils
 - Great [Window management](./config/hammerspoon/README.md) (using Hammerspoon)
 - Fast and colored prompt
 - Updated macOS defaults
@@ -22,8 +22,7 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 
 - [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
 - [homebrew-cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
-- [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
-- Latest Git, Bash 4, Python 3, GNU coreutils, curl, Ruby
+- Latest Git, Bash 4, GNU coreutils, curl
 
 ## Installation
 
@@ -73,13 +72,13 @@ $ dotfiles help
 Usage: dotfiles <command>
 
 Commands:
-    clean            Clean up caches (brew, npm, gem, rvm)
+    clean            Clean up caches (brew)
     dock             Apply macOS Dock settings
     edit             Open dotfiles in IDE (code) and Git GUI (stree)
     help             This help message
     macos            Apply macOS system defaults
     test             Run tests
-    update           Update packages and pkg managers (OS, brew, npm, gem)
+    update           Update packages and pkg managers (OS, brew)
 ```
 
 ## Customize
@@ -89,14 +88,6 @@ You can put your custom settings, such as Git credentials in the `system/.custom
 
 Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`. The runcom `.bash_profile` sources all
 `~/.extra/*.sh` files.
-
-## Additional Resources
-
-- [Awesome Dotfiles](https://github.com/webpro/awesome-dotfiles)
-- [Homebrew](https://brew.sh)
-- [Homebrew Cask](https://github.com/Homebrew/homebrew-cask)
-- [Bash prompt](https://wiki.archlinux.org/index.php/Color_Bash_Prompt)
-- [Solarized Color Theme for GNU ls](https://github.com/seebi/dircolors-solarized)
 
 ## Credits
 
