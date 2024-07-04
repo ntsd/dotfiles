@@ -23,7 +23,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{brew,oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf,brew}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
