@@ -1,5 +1,3 @@
-tap "homebrew/cask"
-
 cask "docker"
 cask "font-fira-code"
 cask "font-hack"
