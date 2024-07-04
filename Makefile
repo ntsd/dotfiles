@@ -1,7 +1,8 @@
 SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
-PATH := $(DOTFILES_DIR)/bin:$(PATH)
+HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local) /home/linuxbrew/.linuxbrew)
+PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
 ASDF_PATH := $(HOME)/.asdf
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
@@ -52,11 +53,6 @@ unlink: stow-$(OS)
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
-	# temporarily add homebrew to PATH if it's arm
-	if [[ "$(uname -m)" == "arm64" ]]; then \
-		echo "export PATH=/opt/homebrew/bin:${PATH}" >> ~/.zshrc && \
-		source ~/.zshrc; \
-	fi
 
 asdf:
 	is-executable asdf || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
