@@ -14,7 +14,7 @@ export STOW_DIR := $(DOTFILES_DIR)
 
 all: $(OS)
 
-macos: sudo core-macos packages link asdf-packages
+macos: sudo core-macos packages link asdf-packages oh-my-zsh
 
 linux: core-linux link asdf-packages
 
@@ -58,7 +58,10 @@ brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
 asdf:
-	[ ! -d $(ASDF_PATH) ] && git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
+	[[ -d $(ASDF_PATH) ]] || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
+
+oh-my-zsh:
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 bash: brew
 ifdef GITHUB_ACTION
