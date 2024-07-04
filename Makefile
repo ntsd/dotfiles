@@ -18,7 +18,7 @@ macos: sudo core-macos packages link asdf-packages
 
 linux: core-linux link asdf-packages
 
-core-macos: brew zsh git
+core-macos: brew bash git
 
 core-linux:
 	apt-get update
