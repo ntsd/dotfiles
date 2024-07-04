@@ -14,11 +14,14 @@ export STOW_DIR := $(DOTFILES_DIR)
 
 all: $(OS)
 
-macos: sudo core-macos packages link asdf-packages oh-my-zsh
+macos: sudo core-macos macos-packages link packages
 
-linux: core-linux link asdf-packages
+linux: core-linux link
 
-core-macos: brew bash git
+# post link packages
+packages: asdf-packages node-packages
+
+core-macos: brew bash git oh-my-zsh
 
 core-linux:
 	apt-get update
@@ -37,7 +40,7 @@ ifndef GITHUB_ACTION
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 endif
 
-packages: brew-packages cask-apps
+macos-packages: brew-packages cask-apps
 
 link: stow-$(OS)
 	# backup old dotfiles
@@ -91,9 +94,12 @@ cask-apps: brew
 	xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
 asdf-packages: asdf
-	. $(ASDF_PATH)/asdf.sh && cd $(DOTFILES_DIR)/install && \
+	. $(ASDF_PATH)/asdf.sh && cd $(HOME) && \
 		cut -d' ' -f1 .tool-versions|xargs -I{} asdf plugin add {} && \
 		asdf install
+
+node-packages: asdf
+	npm install -g $(shell cat install/npmfile)
 
 test:
 	bats test

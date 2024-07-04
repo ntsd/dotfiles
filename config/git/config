@@ -11,7 +11,7 @@
 	trustctime = false
 	autocrlf = input
 	untrackedCache = true
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 
 [credential]
 	helper = osxkeychain
@@ -57,6 +57,7 @@
 	renames = copies
 	indentHeuristic = true
 	tool = Kaleidoscope
+	colorMoved = default
 [difftool]
 	prompt = false
 [difftool "Kaleidoscope"]
@@ -94,3 +95,9 @@
 	newHighlight = green bold 22
 [pull]
 	rebase = true
+
+[delta]
+	navigate = true
+	light = false
+[interactive]
+    diffFilter = delta --color-only

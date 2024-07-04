@@ -13,7 +13,8 @@ sub_help () {
   echo "   dock             Apply macOS Dock settings"
   echo "   macos            Apply macOS system defaults"
   echo "   test             Run tests"
-  echo "   update           Update packages and pkg managers (OS, brew)"
+  echo "   asdf             Update asdf global packages"
+  echo "   update           Update packages and pkg managers (OS, brew, npm)"
 }
 
 sub_test () {
@@ -21,9 +22,7 @@ sub_test () {
 }
 
 sub_update () {
-  sudo softwareupdate -i -a
-  brew update
-  brew upgrade
+  topgrade
 }
 
 sub_clean () {
@@ -39,6 +38,10 @@ sub_macos () {
 
 sub_dock () {
   . "${DOTFILES_DIR}/macos/dock.sh" && echo "Dock reloaded."
+}
+
+sub_asdf () {
+  cd ${DOTFILES_DIR} && make asdf-packages
 }
 
 case $COMMAND_NAME in

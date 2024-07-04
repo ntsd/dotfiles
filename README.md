@@ -80,7 +80,7 @@ Commands:
     help             This help message
     macos            Apply macOS system defaults
     test             Run tests
-    update           Update packages and pkg managers (OS, brew)
+    update           Update packages and pkg managers (OS, brew, npm)
 ```
 
 ## Customize

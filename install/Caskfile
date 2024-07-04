@@ -6,6 +6,7 @@ cask "bitwarden"
 cask "visual-studio-code"
 cask "joplin"
 cask "flux"
+cask "scroll-reverser"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
