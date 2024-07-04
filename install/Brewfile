@@ -1,8 +1,9 @@
 tap "homebrew/bundle"
+tap "lotyp/homebrew-formulae"
 
 brew "bats-core"
 brew "coreutils"
-brew "dockutil"
+brew "lotyp/formulae/dockutil"
 brew "ffmpeg"
 brew "gnu-sed"
 brew "grep"
