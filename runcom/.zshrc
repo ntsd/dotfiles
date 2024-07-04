@@ -2,11 +2,6 @@
 
 [ -z "$PS1" ] && return
 
-# add homebrew to PATH if it's ARM
-if [[ "$(uname -m)" == "arm64" ]]; then
-  export PATH="/opt/homebrew/bin:${PATH}"
-fi
-
 # Resolve DOTFILES_DIR (assuming ~/.dotfiles on distros without readlink and/or $BASH_SOURCE/$0)
 
 READLINK=$(which greadlink 2>/dev/null || which readlink)
@@ -28,7 +23,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{brew,oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 

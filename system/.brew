@@ -1,0 +1,4 @@
+# Add homebrew to PATH if it's ARM
+if [[ "$(uname -m)" == "arm64" ]]; then
+    export PATH="/opt/homebrew/bin:${PATH}"
+fi
