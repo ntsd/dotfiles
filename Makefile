@@ -58,7 +58,7 @@ brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
 asdf:
-	is-executable asdf || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
+	[ ! -d $(ASDF_PATH) ] && git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
 
 bash: brew
 ifdef GITHUB_ACTION
