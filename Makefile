@@ -53,7 +53,7 @@ unlink: stow-$(OS)
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 	# temporarily add homebrew to PATH if it's arm
-	if (("$(uname -m)" == "arm64")); then \
+	if [[ "$(uname -m)" == "arm64" ]]; then \
 		echo "export PATH=/opt/homebrew/bin:${PATH}" >> ~/.zshrc && \
 		source ~/.zshrc; \
 	fi
