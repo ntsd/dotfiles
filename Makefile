@@ -2,8 +2,11 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local) /home/linuxbrew/.linuxbrew)
-PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
 ASDF_PATH := $(HOME)/.asdf
+PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
+SHELL := env PATH=$(PATH) /bin/bash
+SHELLS := /private/etc/shells
+BIN := $(HOMEBREW_PREFIX)/bin
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
 
@@ -57,22 +60,18 @@ brew:
 asdf:
 	is-executable asdf || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
 
-zsh: ZSH=/usr/local/bin/zsh
-zsh: SHELLS=/private/etc/shells
-zsh: brew
+bash: brew
 ifdef GITHUB_ACTION
-	if ! grep -q $(ZSH) $(SHELLS); then \
-		brew install zsh && \
-		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
-		sudo append $(ZSH) $(SHELLS) && \
-		sudo chsh -s $(ZSH); \
+	if ! grep -q bash $(SHELLS); then \
+		brew install bash bash-completion@2 pcre && \
+		sudo append $(shell which bash) $(SHELLS) && \
+		sudo chsh -s $(shell which bash); \
 	fi
 else
-	if ! grep -q $(ZSH) $(SHELLS); then \
-		brew install zsh && \
-		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
-		sudo append $(ZSH) $(SHELLS) && \
-		chsh -s $(ZSH); \
+	if ! grep -q bash $(SHELLS); then \
+		brew install bash bash-completion@2 pcre && \
+		sudo append $(shell which bash) $(SHELLS) && \
+		chsh -s $(shell which bash); \
 	fi
 endif
 
