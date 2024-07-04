@@ -52,6 +52,8 @@ unlink: stow-$(OS)
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	# temporarily add homebrew to PATH if it's ARM
+	export PATH="/opt/homebrew/bin:${PATH}"
 
 asdf:
 	is-executable asdf || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)

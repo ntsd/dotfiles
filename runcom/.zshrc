@@ -2,6 +2,11 @@
 
 [ -z "$PS1" ] && return
 
+# add homebrew to PATH if it's ARM
+if [[ "$(uname -m)" == "arm64" ]]; then
+  export PATH="/opt/homebrew/bin:${PATH}"
+fi
+
 # Resolve DOTFILES_DIR (assuming ~/.dotfiles on distros without readlink and/or $BASH_SOURCE/$0)
 
 READLINK=$(which greadlink 2>/dev/null || which readlink)
