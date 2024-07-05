@@ -14,6 +14,8 @@ sub_help () {
   echo "   macos            Apply macOS system defaults"
   echo "   test             Run tests"
   echo "   asdf             Update asdf global packages"
+  echo "   brew             Update Homebrew/Cask packages"
+  echo "   node             Update Node packages"
   echo "   update           Update packages and pkg managers (OS, brew, npm)"
 }
 
@@ -42,6 +44,14 @@ sub_dock () {
 
 sub_asdf () {
   cd ${DOTFILES_DIR} && make asdf-packages
+}
+
+sub_brew () {
+  cd ${DOTFILES_DIR} && make macos-packages
+}
+
+sub_node () {
+  cd ${DOTFILES_DIR} && make node-packages
 }
 
 case $COMMAND_NAME in
