@@ -3,3 +3,8 @@
 . "$HOME/.asdf/asdf.sh"
 # Load asdf completions
 . "$HOME/.asdf/completions/asdf.bash"
+
+# set bin path and GOPATH for the current Go
+export GOPATH=$(asdf where golang)/packages
+export GOROOT=$(asdf where golang)/go
+export PATH="${PATH}:$(go env GOPATH)/bin"
