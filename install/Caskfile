@@ -7,6 +7,7 @@ cask "visual-studio-code"
 cask "joplin"
 cask "flux"
 cask "scroll-reverser"
+cask "gimp"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
