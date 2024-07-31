@@ -8,6 +8,7 @@ cask "joplin"
 cask "flux"
 cask "scroll-reverser"
 cask "gimp"
+cask "imageoptim"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
