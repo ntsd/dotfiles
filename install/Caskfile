@@ -9,6 +9,7 @@ cask "flux"
 cask "scroll-reverser"
 cask "gimp"
 cask "imageoptim"
+cask "inkscape"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
