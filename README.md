@@ -1,29 +1,28 @@
 # .files
 
-> Warning The Linux is not working in the moment, beacuse the $HOME will change to /root
-
-This dotfile is created from `https://github.com/webpro/dotfiles` boilerplate
-
 These are my dotfiles. Take anything you want, but at your own risk.
 
 It mainly targets macOS systems, but it works on at least Ubuntu as well.
 
+> Warning The Linux is not working in the moment, beacuse the $HOME will change to /root
+
 ## Highlights
 
 - Minimal efforts to install everything, using a [Makefile](./Makefile)
-- Mostly based around Homebrew, Caskroom, latest Bash + GNU Utils
-- Great [Window management](./config/hammerspoon/README.md) (using Hammerspoon)
+- Mostly based around Homebrew, Cask, ASDF, NPM, latest Bash + GNU Utils
 - Fast and colored prompt
-- Updated macOS defaults
-- Well-organized and easy to customize
+- Updated macOS defaults (Dock, Systen)
 - The installation and runcom setup is
-  [tested weekly on real Ubuntu and macOS machines](https://github.com/ntsd/dotfiles/actions) using
+  [tested on real Ubuntu and macOS machines](https://github.com/ntsd/dotfiles/actions) using
   [a GitHub Action](./.github/workflows/ci.yml)
+- Post install `dotfiles` command line to restall, update packages, etc.
 
 ## Packages Overview
 
 - [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
-- [homebrew-cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
+- [Homebrew Cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
+- [asdf](https://github.com/asdf-vm/asdf) (packages: [.tool-versions](./runcom/.tool-versions))
+- [Vs Code](https://github.com/microsoft/vscode) (packages: [VSCodefile](./install/VSCodefile))
 - Latest Git, Bash 4, GNU coreutils, curl
 
 ## Installation
@@ -59,14 +58,6 @@ cd ~/.dotfiles
 make
 ```
 
-The installation process in the Makefile is tested on every push and every week in this
-[GitHub Action](https://github.com/ntsd/dotfiles/actions).
-
-## Post-Installation
-
-- `dotfiles dock` (set [Dock items](./macos/dock.sh))
-- `dotfiles macos` (set [macOS defaults](./macos/defaults.sh))
-
 ## The `dotfiles` command
 
 ```bash
@@ -74,13 +65,15 @@ $ dotfiles help
 Usage: dotfiles <command>
 
 Commands:
-    clean            Clean up caches (brew)
-    dock             Apply macOS Dock settings
-    edit             Open dotfiles in IDE (code) and Git GUI (stree)
-    help             This help message
-    macos            Apply macOS system defaults
-    test             Run tests
-    update           Update packages and pkg managers (OS, brew, npm)
+   help             This help message
+   clean            Clean up caches (brew)
+   dock             Apply macOS Dock settings
+   macos            Apply macOS system defaults
+   test             Run tests
+   asdf             Update asdf global packages
+   brew             Update Homebrew/Cask packages
+   node             Update Node packages
+   update           Update packages and pkg managers (OS, brew, npm)
 ```
 
 ## Customize
@@ -92,5 +85,7 @@ Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`.
 `~/.extra/*.sh` files.
 
 ## Credits
+
+This dotfile is fork from [@webpro Dotfiles](https://github.com/webpro/dotfiles).
 
 Many thanks to the [dotfiles community](https://dotfiles.github.io).
