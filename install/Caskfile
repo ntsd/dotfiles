@@ -11,6 +11,7 @@ cask "scroll-reverser"
 cask "gimp"
 cask "imageoptim"
 cask "inkscape"
+cask "pearcleaner"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
