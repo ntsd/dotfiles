@@ -3,10 +3,6 @@
 	email = jo06942@gmail.com
 	signingkey = 4ADDC83E1C02CC27
 
-# include config if the path for company repo
-[includeIf "gitdir/i:salaryhero/"]
-    path = config.salaryhero
-
 [commit]
 	gpgsign = true
 
@@ -20,6 +16,8 @@
 	autocrlf = input
 	untrackedCache = true
 	pager = delta
+	# specific ssh key for git
+	sshCommand = ssh -i ~/.ssh/id_ed25519_git
 
 [credential]
 	helper = osxkeychain
@@ -109,3 +107,7 @@
 	light = false
 [interactive]
     diffFilter = delta --color-only
+
+# include config if the path for company repo
+[includeIf "gitdir/i:salaryhero/"]
+    path = config.salaryhero

@@ -1,3 +1,7 @@
 [user]
     email = jirawat@salary-hero.com
     name = Jirawat Boonkumnerd
+
+[core]
+    # specific ssh key for git
+    sshCommand = ssh -i ~/.ssh/id_ed25519_git_hero
