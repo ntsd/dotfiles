@@ -1,0 +1,10 @@
+# inshellisens shell plugin for zsh
+if [[ -z "${ISTERM}" && $- = *i* && $- != *c* ]]; then
+  if [[ -o login ]]; then
+    is -s zsh --login
+    exit
+  else
+    is -s zsh
+    exit
+  fi
+fi
