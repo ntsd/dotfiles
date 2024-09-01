@@ -99,7 +99,7 @@ asdf-packages: asdf
 		asdf install
 
 node-packages: asdf
-	. $(ASDF_PATH)/asdf.sh && $(ASDF_PATH)/shims/npm install -g $(shell cat install/npmfile)
+	. $(ASDF_PATH)/asdf.sh && $(ASDF_PATH)/shims/npm install -g $(shell cat install/npmfile) && $(ASDF_PATH)/shims/npm install -g $(shell cat runcom/.default-npm-packages)
 
 test:
 	bats test
