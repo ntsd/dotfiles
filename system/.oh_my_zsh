@@ -9,4 +9,9 @@ plugins=(
   dotenv
 )
 
+# custom plugins
+# fzf-tab
+# zsh-completions
+# zsh-autosuggestions
+
 source $ZSH/oh-my-zsh.sh

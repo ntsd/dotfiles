@@ -12,6 +12,7 @@ cask "gimp"
 cask "imageoptim"
 cask "inkscape"
 cask "pearcleaner"
+cask "amazon-q"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"

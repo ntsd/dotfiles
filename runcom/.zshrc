@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # If not running interactively, don't do anything
 
 [ -z "$PS1" ] && return
@@ -23,7 +25,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf,brew,inshellisense}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{oh_my_zsh,function,function_*,path,env,alias,grep,fix,custom,asdf,brew}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
@@ -50,3 +52,6 @@ unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE EXTRAFILE
 # Export
 
 export DOTFILES_DIR DOTFILES_EXTRA_DIR
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
