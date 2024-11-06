@@ -13,6 +13,7 @@ cask "imageoptim"
 cask "inkscape"
 cask "pearcleaner"
 cask "amazon-q"
+cask "discord"
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlimagesize"
