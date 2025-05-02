@@ -90,8 +90,7 @@ brew-packages: brew
 
 cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
-	for EXT in $$(cat install/VSCodefile); do code --install-extension $$EXT; done
-	xattr -d -r com.apple.quarantine ~/Library/QuickLook
+	for EXT in $$(cat install/VSCodefile); do code-insiders --install-extension $$EXT; done
 
 asdf-packages: asdf
 	. $(ASDF_PATH)/asdf.sh && cd $(HOME) && \

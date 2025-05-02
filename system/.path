@@ -17,9 +17,6 @@ prepend-path "/sbin"
 prepend-path "/usr/sbin"
 prepend-path "/usr/local/sbin"
 
-# brew openjdk
-prepend-path "/opt/homebrew/opt/openjdk/bin"
-
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
 
