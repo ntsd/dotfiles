@@ -14,3 +14,6 @@ alias functions="declare -f | grep '^[a-z].* ()' | sed 's/{$//'"
 
 alias ip="curl -s ipinfo.io | jq -r '.ip'"
 alias ipl="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
+
+# Code insider to Code
+alias code="code-insiders"
