@@ -1,4 +1,14 @@
-COMPUTER_NAME="ntsd"
+if [ -z "${COMPUTER_NAME:-}" ]; then
+  default_name="$(scutil --get ComputerName 2>/dev/null || hostname)"
+  # Prompt user for a computer name (interactive install). Use existing as default.
+  read -rp "Enter desired computer name [${default_name}] (leave blank to keep): " _NEW_COMPUTER_NAME || true
+  if [ -n "${_NEW_COMPUTER_NAME}" ]; then
+    COMPUTER_NAME="${_NEW_COMPUTER_NAME}"
+  else
+    COMPUTER_NAME="${default_name}"
+  fi
+  unset _NEW_COMPUTER_NAME
+fi
 LANGUAGES=(en)
 LOCALE="en_US@currency=USD"
 MEASUREMENT_UNITS="Centimeters"

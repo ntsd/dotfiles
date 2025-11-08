@@ -1,6 +1,7 @@
 [user]
     email = jirawat@salary-hero.com
     name = Jirawat Boonkumnerd
+	signingkey = 4ADDC83E1C02CC27
 
 [core]
     # specific ssh key for git

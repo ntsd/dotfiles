@@ -50,6 +50,36 @@ link: stow-$(OS)
 	stow -t $(HOME) runcom
 	stow -t $(XDG_CONFIG_HOME) config
 
+copilot: stow-$(OS)
+	@echo "Setting up GitHub Copilot custom instructions and chat modes..."
+	# Remove existing symlinks in the prompts directory
+	mkdir -p "$(HOME)/Library/Application Support/Code - Insiders/User/prompts"
+	find "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/" -type l -exec rm {} \;
+	# Link user-level instructions
+	if [ -d "$(DOTFILES_DIR)/config/copilot/instructions" ]; then \
+		for FILE in $(DOTFILES_DIR)/config/copilot/instructions/*.instructions.md; do \
+			ln -sf "$$FILE" "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/$$(basename $$FILE)"; \
+		done; \
+		echo "✓ Linked user-level instructions"; \
+	fi
+	# Link user-level chat modes
+	if [ -d "$(DOTFILES_DIR)/config/copilot/chatmodes" ]; then \
+		for FILE in $(DOTFILES_DIR)/config/copilot/chatmodes/*.chatmode.md; do \
+			ln -sf "$$FILE" "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/$$(basename $$FILE)"; \
+		done; \
+		echo "✓ Linked user-level chat modes"; \
+	fi
+	# Link custom agent files
+	if [ -d "$(DOTFILES_DIR)/config/copilot/agents" ]; then \
+		for FILE in $(DOTFILES_DIR)/config/copilot/agents/*.agent.md; do \
+			ln -sf "$$FILE" "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/$$(basename $$FILE)"; \
+		done; \
+		echo "✓ Linked custom agent files"; \
+	fi
+	@echo "✓ GitHub Copilot configuration complete!"
+	@echo ""
+	@echo "All chat modes and instructions are now available globally in VS Code Insiders."
+
 unlink: stow-$(OS)
 	stow --delete -t $(HOME) runcom
 	stow --delete -t $(XDG_CONFIG_HOME) config
@@ -102,3 +132,4 @@ node-packages: asdf
 
 test:
 	bats test
+
