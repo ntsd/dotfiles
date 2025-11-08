@@ -1,8 +1,3 @@
-[user]
-	name = ntsd
-	email = jo06942@gmail.com
-	signingkey = 4ADDC83E1C02CC27
-
 [commit]
 	gpgsign = true
 
@@ -16,8 +11,6 @@
 	autocrlf = input
 	untrackedCache = true
 	pager = delta
-	# specific ssh key for git
-	sshCommand = ssh -i ~/.ssh/id_ed25519_git
 
 [credential]
 	helper = osxkeychain
@@ -107,6 +100,10 @@
 	light = false
 [interactive]
     diffFilter = delta --color-only
+
+# include config if the path for personal repo
+[includeIf "gitdir/i:ntsd/"]
+    path = config.ntsd
 
 # include config if the path for company repo
 [includeIf "gitdir/i:salaryhero/"]
