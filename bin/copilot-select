@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Source directory (catalog) and target directory can be overridden via env vars
+CATALOG_DIR="${COPILOT_SOURCE_DIR:-$(dirname "$0")/../config/copilot/instructions}"
+TARGET_DIR="${COPILOT_TARGET_DIR:-$(dirname "$0")/../.github/instructions}"
+
+mkdir -p "${TARGET_DIR}"
+
+if [[ ! -d "${CATALOG_DIR}" ]]; then
+  echo "Catalog directory not found: ${CATALOG_DIR}" >&2
+  exit 1
+fi
+
+shopt -s nullglob
+AVAILABLE=("${CATALOG_DIR}"/*.instructions.md)
+shopt -u nullglob
+
+if [[ ${#AVAILABLE[@]} -eq 0 ]]; then
+  echo "No *.instructions.md files found in catalog: ${CATALOG_DIR}" >&2
+  exit 1
+fi
+
+echo "Available instruction files:"; echo
+INDEX=1
+# Bash 3.2 compatibility: use parallel indexed arrays instead of associative array
+MAP_INDEX=()
+MAP_FILE=()
+for FILE in "${AVAILABLE[@]}"; do
+  BASE=$(basename "$FILE")
+  printf "  [%d] %s\n" "$INDEX" "$BASE"
+  MAP_INDEX+=("$INDEX")
+  MAP_FILE+=("$FILE")
+  INDEX=$((INDEX+1))
+done
+
+SELECTED_LIST="${COPILOT_INSTRUCTIONS:-}"
+if [[ -z "${SELECTED_LIST}" ]]; then
+  read -rp $'Enter numbers or filenames (comma-separated) to activate, blank = cancel: ' INPUT || true
+else
+  INPUT="${SELECTED_LIST}"
+fi
+
+if [[ -z "${INPUT}" ]]; then
+  echo "No selection; leaving existing workspace instructions unchanged."; exit 0
+fi
+
+IFS=',' read -r -a TOKENS <<< "${INPUT}"
+ACTIVATE=()
+for TOK in "${TOKENS[@]}"; do
+  TOK_TRIM=$(echo "$TOK" | xargs)
+  [[ -z "${TOK_TRIM}" ]] && continue
+  if [[ "${TOK_TRIM}" =~ ^[0-9]+$ ]]; then
+    # Map numeric selection to file path using parallel arrays
+    FOUND=""
+    for i in "${!MAP_INDEX[@]}"; do
+      if [[ "${MAP_INDEX[$i]}" == "${TOK_TRIM}" ]]; then
+        FOUND="${MAP_FILE[$i]}"; break
+      fi
+    done
+    if [[ -n "$FOUND" ]]; then
+      ACTIVATE+=("$FOUND")
+    else
+      echo "Warning: index ${TOK_TRIM} out of range, skipped" >&2
+    fi
+  else
+    CANDIDATE="${CATALOG_DIR}/${TOK_TRIM}"
+    if [[ -f "${CANDIDATE}" ]]; then
+      ACTIVATE+=("${CANDIDATE}")
+    else
+      echo "Warning: file ${TOK_TRIM} not found in catalog, skipped" >&2
+    fi
+  fi
+done
+
+echo "Updating selected instruction files in workspace: ${TARGET_DIR}";
+
+if [[ ${#ACTIVATE[@]} -eq 0 ]]; then
+  echo "No valid selections; leaving existing workspace instructions unchanged."; exit 0
+fi
+
+for SRC in "${ACTIVATE[@]}"; do
+  BASENAME=$(basename "$SRC")
+  # Overwrite only the selected file; leave others untouched
+  cp "$SRC" "${TARGET_DIR}/${BASENAME}"
+  echo "Activated/Updated: ${BASENAME}"
+done
+
+echo; echo "Active workspace instruction files:"; ls -1 "${TARGET_DIR}"/*.instructions.md
+echo; echo "Done. VS Code will automatically use these for Copilot Chat in this workspace."

@@ -29,45 +29,67 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 
 ## GitHub Copilot Configuration
 
-This dotfiles repository includes comprehensive GitHub Copilot customizations to enhance your AI-assisted coding experience.
+Flexible AI customization with selectable workspace instruction files and task-specific chat modes.
 
-### Workspace-Level Instructions
+### Workspace Instruction Files
 
-Located in `.github/`, these apply automatically to this workspace:
+Core project guidance lives in:
 
-- **[copilot-instructions.md](./.github/copilot-instructions.md)**: Main coding standards and project guidelines
-- **[instructions/](./.github/instructions/)**: File-type specific instructions
-  - `shell-scripts.instructions.md`: Shell scripting standards
-  - `makefile.instructions.md`: Makefile conventions
-  - `documentation.instructions.md`: Documentation guidelines
+- `.github/copilot-instructions.md` (always loaded)
+- `.github/instructions/` (active subset you choose)
+- `.github/instructions_catalog/` (full catalog of optional instruction files)
 
-### Custom Chat Modes
-
-Located in `.github/chatmodes/`, these provide specialized AI personas:
-
-- **agent**: Implementation mode (makes code changes, runs commands, hands off to review/test/document)
-- **plan**: Generate detailed implementation plans without making code changes
-- **review**: Perform thorough code reviews focusing on quality and security
-- **test**: Create comprehensive test cases using the bats framework
-- **document**: Generate clear documentation with examples
-
-### User Profile Instructions
-
-Located in `config/copilot/`, these sync across all your workspaces:
-
-- **instructions/general.instructions.md**: Personal coding standards for all projects
-- **chatmodes/debug.chatmode.md**: Quick debugging and troubleshooting
-- **chatmodes/explain.chatmode.md**: Detailed code and concept explanations
-- **chatmodes/agent.chatmode.md**: Personal implementation mode available across all workspaces
-- **agents/**: Place `*.agent.md` custom agent persona files here (linked by `make copilot`)
-
-To deploy user profile configurations:
+Select which catalog files become active:
 
 ```bash
-make copilot
+make copilot-select   # interactive selection
+COPILOT_INSTRUCTIONS="1,3" make copilot-select  # non-interactive by index
+COPILOT_INSTRUCTIONS="shell-scripts.instructions.md,documentation.instructions.md" make copilot-select  # by filename
 ```
 
-This will symlink the Copilot configurations to your VS Code user profile, making them available across all workspaces.
+The selection copies chosen files into `.github/instructions/` (no global linking). Then:
+
+```bash
+make copilot   # workspace-only usage
+```
+
+### Chat Modes (workspace)
+
+Located in `.github/chatmodes/`:
+
+- `agent.chatmode.md` – Implementation & handoffs
+- `plan.chatmode.md` – Planning only, no edits
+- `review.chatmode.md` – Code quality & security review
+- `test.chatmode.md` – Test case generation (bats focus)
+- `document.chatmode.md` – Documentation generation
+
+### Optional User-Level Linking
+
+If you want these prompts available globally (optional):
+
+```bash
+make copilot-global
+```
+
+This links files from `config/copilot/{instructions,chatmodes,agents}` into the VS Code Insiders prompts directory. Skip this if you prefer per-project isolation.
+
+### Custom Agents
+
+Add custom personas:
+
+```bash
+echo "# My reviewer" > config/copilot/agents/security.agent.md
+make copilot-global
+```
+
+### Typical Workflow
+
+```bash
+make copilot-select    # choose standards needed for this project phase
+make copilot           # confirm workspace setup
+dotfiles copilot       # show workspace status
+dotfiles copilot-select  # reconfigure instructions later
+```
 
 ## Installation
 
@@ -115,9 +137,10 @@ $ dotfiles help
 Usage: dotfiles <command>
 
 Commands:
-   help             This help message
-   clean            Clean up caches (brew)
-   copilot          Setup GitHub Copilot custom instructions and chat modes
+  help             This help message
+  clean            Clean up caches (brew)
+  copilot          Show workspace Copilot instruction/chatmode usage
+  copilot-global   Link user-level Copilot prompt files (advanced)
    dock             Apply macOS Dock settings
    macos            Apply macOS system defaults
    test             Run tests

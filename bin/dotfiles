@@ -10,7 +10,8 @@ sub_help () {
   echo "Commands:"
   echo "   help             This help message"
   echo "   clean            Clean up caches (brew)"
-  echo "   copilot          Setup GitHub Copilot custom instructions and chat modes"
+  echo "   copilot          Show workspace Copilot instruction/chatmode usage"
+  echo "   copilot-global   Link user-level Copilot prompt files (advanced)"
   echo "   dock             Apply macOS Dock settings"
   echo "   macos            Apply macOS system defaults"
   echo "   test             Run tests"
@@ -45,6 +46,10 @@ sub_dock () {
 
 sub_copilot () {
   cd ${DOTFILES_DIR} && make copilot
+}
+
+sub_copilot-global () {
+  cd ${DOTFILES_DIR} && make copilot-global
 }
 
 sub_asdf () {
