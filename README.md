@@ -29,29 +29,36 @@ It mainly targets macOS systems, but it works on at least Ubuntu as well.
 
 ## GitHub Copilot Configuration
 
-Flexible AI customization with selectable workspace instruction files and task-specific chat modes.
+Flexible AI customization with selectable workspace instruction files, task-specific chat modes, and optional global agent/persona linking.
 
 ### Workspace Instruction Files
 
-Core project guidance lives in:
+Loaded from:
 
 - `.github/copilot-instructions.md` (always loaded)
-- `.github/instructions/` (active subset you choose)
-- `.github/instructions_catalog/` (full catalog of optional instruction files)
+- `.github/instructions/` (your active subset)
 
-Select which catalog files become active:
+Selection source (catalog) is `config/copilot/instructions/`. The `make copilot` target invokes the interactive selector (`bin/copilot-select`).
 
-```bash
-make copilot-select   # interactive selection
-COPILOT_INSTRUCTIONS="1,3" make copilot-select  # non-interactive by index
-COPILOT_INSTRUCTIONS="shell-scripts.instructions.md,documentation.instructions.md" make copilot-select  # by filename
-```
-
-The selection copies chosen files into `.github/instructions/` (no global linking). Then:
+Interactive selection:
 
 ```bash
-make copilot   # workspace-only usage
+make copilot            # shows list; enter numbers or filenames
 ```
+
+Non-interactive (indexes):
+
+```bash
+COPILOT_INSTRUCTIONS="1,3" make copilot
+```
+
+Non-interactive (filenames):
+
+```bash
+COPILOT_INSTRUCTIONS="shell-scripts.instructions.md,documentation.instructions.md" make copilot
+```
+
+Behavior: Only the selected files are copied (added/overwritten) into `.github/instructions/`; existing instruction files not in the selection are preserved (non‑destructive update).
 
 ### Chat Modes (workspace)
 
@@ -63,15 +70,15 @@ Located in `.github/chatmodes/`:
 - `test.chatmode.md` – Test case generation (bats focus)
 - `document.chatmode.md` – Documentation generation
 
-### Optional User-Level Linking
+### Optional User-Level (Global) Linking
 
-If you want these prompts available globally (optional):
+Make them available in all VS Code (Insiders) workspaces:
 
 ```bash
 make copilot-global
 ```
 
-This links files from `config/copilot/{instructions,chatmodes,agents}` into the VS Code Insiders prompts directory. Skip this if you prefer per-project isolation.
+This symlinks files from `config/copilot/{instructions,chatmodes,agents}` into the user prompts directory. Omit if you want per‑project isolation only.
 
 ### Custom Agents
 
@@ -85,10 +92,10 @@ make copilot-global
 ### Typical Workflow
 
 ```bash
-make copilot-select    # choose standards needed for this project phase
-make copilot           # confirm workspace setup
-dotfiles copilot       # show workspace status
-dotfiles copilot-select  # reconfigure instructions later
+make copilot                # choose/update active instructions
+dotfiles copilot            # inspect workspace Copilot status
+COPILOT_INSTRUCTIONS="1,3" make copilot  # scripted update
+make copilot-global         # (optional) enable globally
 ```
 
 ## Installation
@@ -158,22 +165,32 @@ You can put your custom settings, such as Git credentials in the `system/.custom
 Alternatively, you can have an additional, personal dotfiles repo at `~/.extra`. The runcom `.bash_profile` sources all
 `~/.extra/*.sh` files.
 
-### Copilot Configuration Deployment
+### Copilot Configuration Deployment Summary
 
-Deploy workspace + user-level Copilot config (instructions, chat modes, agents):
+Workspace-only:
 
 ```bash
 make copilot
 ```
 
-This links:
-- `.github/copilot-instructions.md` and `.github/instructions/*.instructions.md`
-- `.github/chatmodes/*.chatmode.md` (including `agent.chatmode.md`)
-- `config/copilot/instructions/*.instructions.md`
-- `config/copilot/chatmodes/*.chatmode.md`
-- `config/copilot/agents/*.agent.md`
+Global (user-level prompts):
 
-Add new custom agent personas by creating `config/copilot/agents/mypersona.agent.md` then re-run `make copilot`.
+```bash
+make copilot-global
+```
+
+Add a custom agent persona:
+
+```bash
+echo "# Incident responder" > config/copilot/agents/pagerduty.agent.md
+make copilot-global
+```
+
+To script instruction activation in CI (non-interactive):
+
+```bash
+COPILOT_INSTRUCTIONS="general.instructions.md,markdown.instructions.md" make copilot
+```
 
 ## Credits
 
