@@ -45,7 +45,38 @@ sub_dock () {
 }
 
 sub_copilot () {
-  cd ${DOTFILES_DIR} && make copilot
+  # If running inside the dotfiles repo, just delegate to make target
+  if [[ "$PWD" == "$DOTFILES_DIR" ]]; then
+    make copilot
+    return
+  fi
+
+  # Ensure workspace .github structure exists in current repo
+  mkdir -p .github/instructions .github/chatmodes
+
+  # Copy (not link) baseline workspace instructions/controller file if absent
+  if [[ ! -f .github/copilot-instructions.md ]]; then
+    cp "$DOTFILES_DIR/.github/copilot-instructions.md" .github/copilot-instructions.md
+    echo "Added .github/copilot-instructions.md"
+  fi
+
+  # Seed chat modes if directory empty
+  shopt -s nullglob
+  CHAT_EXISTING=( .github/chatmodes/*.chatmode.md )
+  shopt -u nullglob
+  if [[ ${#CHAT_EXISTING[@]} -eq 0 ]]; then
+    if [[ -d "$DOTFILES_DIR/.github/chatmodes" ]]; then
+      cp "$DOTFILES_DIR"/.github/chatmodes/*.chatmode.md .github/chatmodes/ 2>/dev/null || true
+      echo "Seeded chat modes into .github/chatmodes/"
+    fi
+  fi
+
+  # Invoke selector with target = current repo; catalog sourced from dotfiles repo
+  COPILOT_SOURCE_DIR="$DOTFILES_DIR/config/copilot/instructions" \
+  COPILOT_TARGET_DIR="$PWD/.github/instructions" \
+  "$DOTFILES_DIR/bin/copilot-select"
+
+  echo "Workspace Copilot setup complete in $PWD/.github";
 }
 
 sub_copilot-global () {

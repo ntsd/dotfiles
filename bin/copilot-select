@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Source directory (catalog) and target directory can be overridden via env vars
-CATALOG_DIR="${COPILOT_SOURCE_DIR:-$(dirname "$0")/../config/copilot/instructions}"
-TARGET_DIR="${COPILOT_TARGET_DIR:-$(dirname "$0")/../.github/instructions}"
+# Source (catalog) directory and target directory can be overridden via env vars.
+# Default target now uses the current working directory (workspace) rather than the script location.
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+CATALOG_DIR="${COPILOT_SOURCE_DIR:-${SCRIPT_DIR}/../config/copilot/instructions}"
+TARGET_DIR="${COPILOT_TARGET_DIR:-${PWD}/.github/instructions}"
 
 mkdir -p "${TARGET_DIR}"
 
