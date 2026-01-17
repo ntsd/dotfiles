@@ -62,12 +62,6 @@ copilot-global: stow-$(OS)
 	@echo "Linking user-level Copilot instructions, chat modes, and agents (advanced)."
 	mkdir -p "$(HOME)/Library/Application Support/Code - Insiders/User/prompts"
 	find "$(HOME)/Library/Application Support/Code - Insiders/User/prompts" -type l -exec rm {} \; || true
-	if [ -d "$(DOTFILES_DIR)/config/copilot/instructions" ]; then \
-		for FILE in $(DOTFILES_DIR)/config/copilot/instructions/*.instructions.md; do \
-			ln -sf "$$FILE" "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/$$(basename $$FILE)"; \
-		done; \
-		echo "✓ Linked user-level instructions"; \
-	fi
 	if [ -d "$(DOTFILES_DIR)/config/copilot/chatmodes" ]; then \
 		for FILE in $(DOTFILES_DIR)/config/copilot/chatmodes/*.chatmode.md; do \
 			ln -sf "$$FILE" "$(HOME)/Library/Application Support/Code - Insiders/User/prompts/$$(basename $$FILE)"; \
