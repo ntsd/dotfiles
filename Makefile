@@ -2,7 +2,6 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos /opt/homebrew /home/linuxbrew/.linuxbrew)
-ASDF_PATH := $(HOME)/.asdf
 PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
 SHELL := env PATH=$(PATH) /bin/bash
 SHELLS := /private/etc/shells
@@ -87,7 +86,7 @@ brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
 asdf:
-	[[ -d $(ASDF_PATH) ]] || git clone https://github.com/asdf-vm/asdf.git $(ASDF_PATH)
+	brew list asdf || brew install asdf
 
 oh-my-zsh:
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -119,12 +118,12 @@ cask-apps: brew
 	for EXT in $$(cat install/VSCodefile); do code-insiders --install-extension $$EXT; done
 
 asdf-packages: asdf
-	. $(ASDF_PATH)/asdf.sh && cd $(HOME) && \
-		cut -d' ' -f1 .tool-versions|xargs -I{} asdf plugin add {} && \
+	cd $(HOME) && \
+		cut -d' ' -f1 .tool-versions | xargs -I{} sh -c 'asdf plugin list | grep -qx "{}" || asdf plugin add "{}"' && \
 		asdf install
 
 node-packages: asdf
-	. $(ASDF_PATH)/asdf.sh && $(ASDF_PATH)/shims/npm install -g $(shell cat install/npmfile) && $(ASDF_PATH)/shims/npm install -g $(shell cat runcom/.default-npm-packages)
+	asdf exec npm install -g $(shell cat install/npmfile) && asdf exec npm install -g $(shell cat runcom/.default-npm-packages)
 
 test:
 	bats test
