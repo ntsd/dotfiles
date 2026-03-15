@@ -123,9 +123,9 @@ asdf-packages: asdf
 		asdf install
 
 node-packages: asdf-packages
-	# Reshim nodejs to ensure global packages are linked correctly after installation 
-	. "$(brew --prefix asdf)/libexec/asdf.sh"
-	asdf exec npm install -g $(shell cat install/npmfile) && asdf exec npm install -g $(shell cat runcom/.default-npm-packages)
+	# Reshim nodejs to ensure global packages are linked correctly after installation
+	. "/opt/homebrew/opt/asdf/libexec/asdf.sh" && \
+		asdf exec npm install -g $(shell cat install/npmfile) && asdf exec npm install -g $(shell cat runcom/.default-npm-packages)
 
 test:
 	bats test
