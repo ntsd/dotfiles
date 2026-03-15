@@ -1,16 +1,10 @@
 
-# Use asdf 0.16+ binary installed by Homebrew when available.
-if command -v brew &> /dev/null; then
-	ASDF_BIN_DIR="$(brew --prefix asdf 2>/dev/null)/bin"
-	if [[ -n "${ASDF_BIN_DIR}" && -d "${ASDF_BIN_DIR}" && ":${PATH}:" != *":${ASDF_BIN_DIR}:"* ]]; then
-		export PATH="${ASDF_BIN_DIR}:${PATH}"
-	fi
-	unset ASDF_BIN_DIR
-fi
+# configure asdf
+. "$(brew --prefix asdf)/libexec/asdf.sh"
 
 # set bin path and GOPATH for the current Go
 if command -v asdf &> /dev/null && asdf where golang &> /dev/null; then
 	export GOPATH="$(asdf where golang)/packages"
 	export GOROOT="$(asdf where golang)/go"
-	export PATH="${PATH}:$(go env GOPATH)/bin"
+	export PATH="${PATH}:${GOROOT}/bin"
 fi

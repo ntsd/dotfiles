@@ -118,11 +118,11 @@ cask-apps: brew
 	for EXT in $$(cat install/VSCodefile); do code-insiders --install-extension $$EXT; done
 
 asdf-packages: asdf
-	cd $(HOME) && \
+	cd $(DOTFILES_DIR)/runcom && \
 		cut -d' ' -f1 .tool-versions | xargs -I{} sh -c 'asdf plugin list | grep -qx "{}" || asdf plugin add "{}"' && \
 		asdf install
 
-node-packages: asdf
+node-packages: asdf-packages
 	asdf exec npm install -g $(shell cat install/npmfile) && asdf exec npm install -g $(shell cat runcom/.default-npm-packages)
 
 test:
